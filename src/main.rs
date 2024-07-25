@@ -1,7 +1,10 @@
 mod routes;
-mod model;
+mod models;
+mod handlers;
+mod services;
+mod util;
+mod middleware;
 
-use axum::{routing::{get}, Router};
 use log::{debug, warn};
 
 #[tokio::main]
@@ -9,9 +12,7 @@ async fn main() {
     init_logging();
 
     debug!("Starting server...");
-    let app = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
-        .route("/health", get(routes::health::health_status));
+    let app = routes::health_route::health_status().await;
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
     axum::serve(listener, app.into_make_service()).await.unwrap();
