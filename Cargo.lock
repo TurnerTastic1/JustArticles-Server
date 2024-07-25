@@ -420,6 +420,7 @@ dependencies = [
  "axum",
  "log",
  "log4rs",
+ "serde",
  "tokio",
 ]
 
