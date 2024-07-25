@@ -1,0 +1,14 @@
+version: '3'
+services:
+  justarticles-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/justarticles
+    ports:
+      - "8080:8080"
+    command: cargo run
+    volumes:
+      - .:/usr/src/justarticles
+    environment:
+      RUST_BACKTRACE: 1
